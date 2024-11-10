@@ -1,16 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/10 10:41:02 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/10 12:40:19 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-
-char	*ft_strnchr(const char *s, int c, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n && s[i] != (unsigned char)c)
-		i++;
-	if (s[i] == (unsigned char)c)
-		return ((char *)(s + i));
-	return ((char *)(s + i + 1));
-}
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -56,13 +56,14 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (dst_len + src_len);
 }
 
-t_line	*ft_linenew(void)
+t_line	*ft_linenew(void	*content)
 {
 	t_line	*line;
 
 	line = (t_line *)ft_calloc(1, sizeof(t_line));
 	if (!line)
 		return (NULL);
+	line->c = *(char *)content;
 	line->next = NULL;
 	return (line);
 }
