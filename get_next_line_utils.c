@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcosta-g <lcosta-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 10:41:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/10 12:40:19 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/11 11:58:10 by lcosta-g          #+#    #+#             */
+/*   Updated: 2024/11/11 15:55:30 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	dst[dst_len + i] = '\0';
 	return (dst_len + src_len);
+}
+
+void	clean_buffer(char buffer[BUFFER_SIZE], int i)
+{
+	while (i < BUFFER_SIZE)
+		buffer[i++] = '\0';
 }
 
 t_line	*ft_linenew(void	*content)
