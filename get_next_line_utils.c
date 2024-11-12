@@ -6,7 +6,7 @@
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:10 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/12 15:10:06 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:30:36 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,24 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*dup;
+	size_t	m_size;
 	size_t	i;
+	void	*temp;
 
-	i = 0;
-	dup = (char *)malloc(ft_strlen(s) + 1);
-	if (!dup)
+	if (!nmemb || !size)
+		return (malloc(0));
+	m_size = nmemb * size;
+	if (m_size / size != nmemb)
 		return (NULL);
-	while (s[i])
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+	temp = malloc(m_size);
+	if (!temp)
+		return (NULL);
+	i = 0;
+	while (i < m_size)
+		((unsigned char *)temp)[i++] = 0;
+	return (temp);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -81,7 +83,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start >= len_s)
-		return (ft_strdup(""));
+		return (ft_calloc(1, sizeof(char)));
 	if ((len_s - start) < len)
 		len = len_s - start;
 	substr = (char *)malloc(len + 1);
