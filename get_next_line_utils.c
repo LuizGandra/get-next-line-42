@@ -6,7 +6,7 @@
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:10 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/12 14:33:27 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:10:06 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	while (s2[j])
 		temp[i++] = s2[j++];
-	temp[i] = '\0'
+	temp[i] = '\0';
 	return (temp);
 }
 
@@ -75,8 +75,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	unsigned int	len_s;
 	char			*substr;
-	size_t			i;
-	size_t			j;
+	unsigned int	i;
 
 	len_s = ft_strlen(s);
 	if (!s)
@@ -89,9 +88,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!substr)
 		return (NULL);
 	i = 0;
-	j = s + start;
 	while (i < len)
-		substr[i++] = s[j++];
+		substr[i++] = s[start++];
 	substr[i] = '\0';
 	return (substr);
 }

@@ -6,7 +6,7 @@
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:16 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/12 14:29:05 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:24:47 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-#include <fcntl.h> // REMOVE
-#include <stdio.h> // REMOVE
+# include <fcntl.h> // REMOVE
+# include <stdio.h> // REMOVE
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_calloc(size_t nmemb, size_t size);
-
 
 #endif
