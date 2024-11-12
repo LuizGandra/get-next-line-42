@@ -3,121 +3,119 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcosta-g <lcosta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:05 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/11 17:10:16 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:33:33 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+static void	find_next_line(int fd, char buffer[BUFFER_SIZE + 1], char *temp);
+static char	*get_line(char *temp, int *next_line_start);
+static char	*get_rest(char *temp, int next_line_start);
+static void	clean_buffer(char buffer[BUFFER_SIZE]);
+
 char	*get_next_line(int fd)
 {
-	static t_reader	reader;
-	char			buffer[BUFFER_SIZE];
-	int				bytes;
-	int				i;
+	char		buffer[BUFFER_SIZE + 1];
+	char		*line;
+	static char	*temp;
+	int			start;
 
-	if (contains_newline(reader.line))
-		return (create_string(&reader));
-	reader.bytes_read = get_bytes_read(reader.line);
-	bytes = read(fd, buffer, BUFFER_SIZE);
-	if (bytes > 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (!temp)
+		temp = ft_strdup("");
+	clean_buffer(buffer);
+	temp = find_next_line(fd, buffer, temp);
+	if (!temp)
+		return (NULL);
+	line = get_line(temp, &start);
+	if (!line)
+		return (NULL);
+	temp = get_rest(temp, start);
+	return (line);
+}
+
+static void	find_next_line(int fd, char buffer[BUFFER_SIZE + 1], char *temp)
+{
+	// * lê até achar um \n e atribui o valor lido no temp
+	char	*new_str;
+	int		read_bytes;
+
+	// ! se tiver um \n no temp, ele não lê mais, o que resolve o problema
+	// ! que eu tava tendo antes
+	while (ft_strchr(temp, '\n')) // * lê enquanto não ler um \n no temp
 	{
-		if (bytes < BUFFER_SIZE)
-			clean_buffer(buffer, bytes);
-		save_buffer(&reader, buffer, bytes);
-		i = 0;
-		while (i < BUFFER_SIZE && buffer[i] != '\n')
-			i++;
-		if (i == BUFFER_SIZE)
+		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		// * se não ler nada e não tiver nada no temp, o arquivo acabou
+		if (read_bytes == 0 && !ft_strlen(temp))
 		{
-			reader.bytes_read += i;
-			return (get_next_line(fd));
+			free(temp);
+			return (NULL);
 		}
-		reader.bytes_read += (i + 1);
-		return (create_string(&reader));
+		// * se não ler nada e tiver algo no temp, retorna temp
+		if (read_bytes <= 0)
+			return (temp);
+		// * adiciona o \0 depois do que foi lido
+		// * pra não ter que limpar o buffer a cada execução
+		// * impedindo de dar problema se o read ler menos que buffer_size
+		buffer[read_bytes] = '\0';
+		new_str = ft_strjoin(temp, buffer);
+		free(temp);
+		temp = new_str;
 	}
-	return (create_string(&reader));
+	return (temp);
 }
 
-int	contains_newline(t_line *line)
+static char	*get_line(char *temp, int *next_line_start)
 {
-	while (line)
-	{
-		if (line->c == '\n')
-			return (1);
-		line = line->next;
-	}
-	return (0);
-}
-
-void	save_buffer(t_reader *reader, char buffer[BUFFER_SIZE], int bytes)
-{
-	t_line	*new;
 	int		i;
 
 	i = 0;
-	while (i < bytes)
-	{
-		new = ft_linenew(&buffer[i++]);
-		if (!new)
-			free_line(reader);
-		ft_lineadd_back(&reader->line, new);
-	}
-}
-
-char	*create_string(t_reader *reader)
-{
-	t_line			*line;
-	char			*str;
-	unsigned int	i;
-
-	if (!reader->line)
-		return (NULL);
-	line = reader->line;
-	str = ft_calloc(1, reader->bytes_read + 1);
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (line && i < reader->bytes_read)
-	{
-		str[i++] = line->c;
-		line = line->next;
-	}
-	free_line(reader);
-	return (str);
-}
-
-int	get_bytes_read(t_line *line)
-{
-	int	bytes_read;
-
-	if (!line)
-		return (0);
-	bytes_read = 0;
-	while (line && line->c != '\n')
-	{
-		bytes_read++;
-		line = line->next;
-	}
-	return (bytes_read);
-}
-
-void	free_line(t_reader *reader)
-{
-	t_line				*temp;
-	unsigned int		i;
-
-	i = 0;
-	while (reader->line && i < reader->bytes_read)
-	{
-		temp = reader->line->next;
-		free(reader->line);
-		reader->line = temp;
+	while (temp[i] && temp[i] != '\n');
 		i++;
+	// * se achar um \n, o next_line_start é o index seguinte
+	// * funciona também pra múltiplos \n seguidos
+	if (temp[i] == '\n')
+		*next_line_start = i + 1;
+	else // * se não achar um \n, leu o temp todo
+	{
+		*next_line_start = i; // * vai ser usado pra lógica de definir start = 0
+		if (i == 0 && temp[i] == '\0')
+			return (NULL);
 	}
+	// * a linha é uma substring do início de temp até o \n ou final do temp
+	return (ft_substr(temp, 0, *next_line_start)) // TODO add ft_substr
+}
+
+static char	*get_rest(char *temp, int next_line_start)
+{
+	char	*rest;
+	int		len;
+
+	// * se não tiver sido encontrado um \n, start vai ter o comprimento do temp
+	len = ft_strlen(temp) - next_line_start; // * e len será 0
+	if (len <= 0) // * não sobrou nada pra guardar
+	{
+		free(temp);
+		return (NULL);
+	}
+	// * cria a substr com o rest, que vai do index start até len caracteres
+	rest = ft_substr(temp, next_line_start, len);
+	free(temp);
+	return (rest);
+}
+
+static void	clean_buffer(char buffer[BUFFER_SIZE])
+{
+	int	i;
+
+	i = 0;
+	while (i < BUFFER_SIZE)
+		buffer[i++] = '\0';
 }
 
 // int	main(void)
