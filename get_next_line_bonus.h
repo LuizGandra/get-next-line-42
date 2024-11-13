@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:16 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/13 17:43:42 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:19:16 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
+# endif
+
+# ifndef MAX_FILES
+#  define MAX_FILES 1024
 # endif
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h> // REMOVE
 # include <stdio.h> // REMOVE
+
+typedef struct s_reader
+{
+	char			*temp;
+	int				files[MAX_FILES];
+	int				file_count;
+}	t_reader;
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
