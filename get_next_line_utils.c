@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lcosta-g <lcosta-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:10 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/12 19:30:36 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:20:28 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start >= len_s)
-		return (ft_calloc(1, sizeof(char)));
+		return ((char *)ft_calloc(1, sizeof(char)));
 	if ((len_s - start) < len)
 		len = len_s - start;
 	substr = (char *)malloc(len + 1);
