@@ -6,7 +6,7 @@
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:16 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/15 16:09:32 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:35:14 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h> // REMOVE
-# include <stdio.h> // REMOVE
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);

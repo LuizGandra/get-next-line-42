@@ -6,7 +6,7 @@
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:05 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/15 16:02:28 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:36:08 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,21 +97,3 @@ void	*free_buffer(void *buffer)
 		free(buffer);
 	return (NULL);
 }
-
-// int	main(void)
-// {
-// 	char	*line;
-// 	int		fd;
-// 	int		i;
-
-// 	i = 0;
-// 	fd = open("test", O_RDONLY);
-// 	while (i < 1)
-// 	{
-// 		line = get_next_line(fd);
-// 		printf("|%s|\n", line);
-// 		free(line);
-// 		i++;
-// 	}
-// 	close(fd);
-// }
