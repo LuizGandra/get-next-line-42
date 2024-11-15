@@ -6,11 +6,11 @@
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:10 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/13 17:43:49 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:03:56 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {

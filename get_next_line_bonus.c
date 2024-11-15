@@ -5,43 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 11:58:05 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/13 18:35:30 by lcosta-g         ###   ########.fr       */
+/*   Created: 2024/11/15 15:46:02 by lcosta-g          #+#    #+#             */
+/*   Updated: 2024/11/15 16:26:22 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
 char	*find_next_line(int fd, char *temp);
-char	*get_line(char *temp, int *next_line_start);
+char	*get_line_from_temp(char *temp, int *next_line_start);
 char	*get_rest(char *temp, int next_line_start);
 void	*free_buffer(void *buffer);
 
 char	*get_next_line(int fd)
 {
-	static t_reader	reader;
-	char			*temp;
+	static char		*temp[MAX_FILES];
 	char			*line;
 	int				start;
-	int				i;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FILES)
 		return (NULL);
-	i = 0;
-	while (i < reader.file_count && reader.files[i] != fd)
-		i++;
-	if (i == reader.file_count)
-	{
-		reader.files[i] = fd;
-		reader.file_count += 1;
-	}
-	temp = reader.temp;
-	temp = find_next_line(fd, temp);
-	if (!temp)
+	temp[fd] = find_next_line(fd, temp[fd]);
+	if (!temp[fd])
 		return (NULL);
 	start = 0;
-	line = get_line(temp, &start);
-	temp = get_rest(temp, start);
+	line = get_line_from_temp(temp[fd], &start);
+	temp[fd] = get_rest(temp[fd], start);
 	return (line);
 }
 
@@ -74,7 +63,7 @@ char	*find_next_line(int fd, char *temp)
 	return (temp);
 }
 
-char	*get_line(char *temp, int *next_line_start)
+char	*get_line_from_temp(char *temp, int *next_line_start)
 {
 	int		i;
 
@@ -101,3 +90,28 @@ char	*get_rest(char *temp, int next_line_start)
 	free_buffer(temp);
 	return (rest);
 }
+
+void	*free_buffer(void *buffer)
+{
+	if (buffer)
+		free(buffer);
+	return (NULL);
+}
+
+// int	main(void)
+// {
+// 	char	*line;
+// 	int		fd;
+// 	int		i;
+
+// 	i = 0;
+// 	fd = open("test", O_RDONLY);
+// 	while (i < 1)
+// 	{
+// 		line = get_next_line(fd);
+// 		printf("|%s|\n", line);
+// 		free(line);
+// 		i++;
+// 	}
+// 	close(fd);
+// }

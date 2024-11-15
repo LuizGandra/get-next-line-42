@@ -6,7 +6,7 @@
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:58:05 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/13 18:43:52 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:02:28 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			start;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0))
-		return (free_buffer(temp));
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	temp = find_next_line(fd, temp);
 	if (!temp)
 		return (NULL);
@@ -55,7 +55,7 @@ static char	*find_next_line(int fd, char *temp)
 			return (free_buffer(temp));
 		}
 		buffer[bytes_read] = '\0';
-		str = ft_strjoin(temp, buffer); // ! probably error here
+		str = ft_strjoin(temp, buffer);
 		free_buffer(temp);
 		temp = str;
 	}
