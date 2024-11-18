@@ -6,7 +6,7 @@
 /*   By: lcosta-g <lcosta-g@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:46:02 by lcosta-g          #+#    #+#             */
-/*   Updated: 2024/11/15 16:36:25 by lcosta-g         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:13:23 by lcosta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 	char			*line;
 	int				start;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FILES)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FILES)
 		return (NULL);
 	temp[fd] = find_next_line(fd, temp[fd]);
 	if (!temp[fd])
