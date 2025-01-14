@@ -22,5 +22,5 @@ The project is divided into two parts, the **mandatory** and the **bonus**, whic
 *****_All bonus files have "\_bonus" at the end of their names. To run the project with the bonus, simply compile these files, as they also include the mandatory logic_.
 
 **The bonus has two requirements:**
-[x] Develop the function using only one static variable.
-[x] The function must be able to handle multiple file descriptors at the same time.
+- [x] Develop the function using only one static variable.
+- [x] The function must be able to handle multiple file descriptors at the same time.
