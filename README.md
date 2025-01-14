@@ -8,7 +8,8 @@ get_next_line() is a C function that reads the next line from a file and returns
 
 ## How to Test
 Clone the repository and compile the files with your preferred C compiler, such as **clang** or **gcc**.
-***Note:** _the project is separated into two parts, the mandatory and the bonus. If you want to compile the project with the bonus, only the files with "\_bonus" at the end of the name should be compiled_.
+
+**Note:** _the project is separated into two parts, the mandatory and the bonus. If you want to compile the project with the bonus, only the files with "\_bonus" at the end of the name should be compiled_.
 
 ## Project Structure
 The project is divided into two parts, the **mandatory** and the **bonus**, which includes the entire original project and more resources.
