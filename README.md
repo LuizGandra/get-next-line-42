@@ -1,5 +1,5 @@
 # Get Next Line
-get_next_line() is a C function that reads the next line from a file and returns it. This project was developed as part of the **Common Core** curriculum at [**42 São Paulo**](https://www.42sp.org.br/).
+**get_next_line()** is a C function that reads the next line from a file and returns it. This project was developed as part of the **Common Core** curriculum at [**42 São Paulo**](https://www.42sp.org.br/).
 
 ## What You Will Learn
 - What is a FD in Unix systems
