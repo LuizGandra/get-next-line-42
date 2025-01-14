@@ -20,7 +20,7 @@ The project is divided into two parts, the **mandatory** and the **bonus**, whic
 - `get_next_line.h` is the project header file.
 
 ## Bonus
-_All bonus files have "\_bonus" at the end of their names. To run the project with the bonus, simply compile these files, as they also include the mandatory logic_.
+All bonus files have "\_bonus" at the end of their names. To run the project with the bonus, simply compile these files, as they also include the mandatory logic.
 
 **The bonus has two requirements:**
 - [x] Develop the function using only one static variable.
