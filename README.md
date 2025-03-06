@@ -1,4 +1,4 @@
-# Get Next Line - Line Reading Made Simple
+# Get Next Line - Line Reading
 
 Get Next Line is a project from the [42 São Paulo](https://www.42sp.org.br/) Common Core curriculum. It focuses on creating a function that reads a line from a file descriptor, returning it one line at a time, enhancing C programming skills with practical utility.
 
