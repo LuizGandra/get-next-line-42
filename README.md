@@ -33,8 +33,8 @@ Get Next Line delivers a function, `get_next_line()`, that retrieves a line from
 
 ### Prerequisites
 
-- C compiler (e.g., `clang` or `gcc`)
-- `make` utility
+- C compiler (e.g., `clang` or `gcc`).
+- `make` utility.
 
 ### How to Build and Run
 
